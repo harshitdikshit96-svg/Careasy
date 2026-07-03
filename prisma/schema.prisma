@@ -1,0 +1,52 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Car {
+  id           String      @id @default(cuid())
+  brand        String
+  model        String
+  variant      String      @default("")
+  year         Int
+  price        Int
+  fuel         String
+  transmission String
+  mileage      Int
+  location     String
+  category     String
+  ownership    String      @default("1st")
+  description  String      @default("")
+  images       String      @default("[]") // JSON-encoded string[]
+  features     String      @default("[]") // JSON-encoded string[]
+  verified     Boolean     @default(false)
+  finance      Boolean     @default(false)
+  trending     Boolean     @default(false)
+  featured     Boolean     @default(false)
+  newArrival   Boolean     @default(false)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  analytics    Analytics[]
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String
+  role      String   @default("user") // "admin" | "user"
+  createdAt DateTime @default(now())
+}
+
+model Analytics {
+  id        String   @id @default(cuid())
+  type      String   // "visit" | "view" | "whatsapp" | "call"
+  carId     String?
+  car       Car?     @relation(fields: [carId], references: [id], onDelete: SetNull)
+  sessionId String?
+  createdAt DateTime @default(now())
+}
