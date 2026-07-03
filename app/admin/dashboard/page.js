@@ -3,6 +3,8 @@ import { prisma } from "@/lib/db";
 import { serializeCar } from "@/lib/carSerializer";
 import AdminInventory from "./AdminInventory";
 
+export const dynamic = "force-dynamic";
+
 function formatPriceServer(v) {
   return new Intl.NumberFormat("en-IN", {
     maximumFractionDigits: 1,

@@ -7,6 +7,8 @@ import { prisma } from "@/lib/db";
 import { serializeCar } from "@/lib/carSerializer";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const [featuredDb, trendingDb] = await Promise.all([
     prisma.car.findMany({ where: { featured: true }, take: 6, orderBy: { createdAt: "desc" } }),

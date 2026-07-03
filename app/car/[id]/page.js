@@ -5,6 +5,8 @@ import CarEnquiryButtons from "@/components/car/CarEnquiryButtons";
 import { prisma } from "@/lib/db";
 import { serializeCar } from "@/lib/carSerializer";
 
+export const dynamic = "force-dynamic";
+
 function formatPrice(v) {
   return new Intl.NumberFormat("en-IN", {
     maximumFractionDigits: 1,

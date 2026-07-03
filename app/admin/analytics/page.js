@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+
 const TYPE_LABELS = {
   visit: "Page Visit",
   view: "Car View",

@@ -43,27 +43,24 @@ export default function FilterBar({ filters, onChange, onReset, totalResults }) 
       {/* Filter selects: horizontal scroll on mobile, grid on desktop */}
       <div className="flex gap-2 overflow-x-auto border-t border-slate-100 px-3 pb-3 pt-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:px-4 sm:pb-4 lg:grid lg:grid-cols-7 lg:overflow-visible">
         {FILTERS.map((f) => (
-          <div key={f.key} className="relative shrink-0 lg:shrink lg:w-full">
-            {/* Visible pill: content-width on mobile, full-width on desktop */}
-            <div className={`pointer-events-none flex items-center justify-between gap-1 whitespace-nowrap rounded-full border px-3 py-2 text-xs font-semibold lg:w-full lg:rounded-xl lg:py-2.5 lg:text-sm ${
-              filters[f.key]
-                ? "border-emerald-500 bg-emerald-50 text-emerald-700"
-                : "border-slate-200 bg-white text-slate-700"
-            }`}>
-              <span>{filters[f.key] || f.label}</span>
-              <span className={`text-[9px] lg:text-[10px] ${filters[f.key] ? "text-emerald-500" : "text-slate-400"}`}>▼</span>
-            </div>
-            {/* Invisible native select layered on top */}
+          <div key={f.key} className="relative shrink-0 lg:shrink">
             <select
               value={filters[f.key] ?? ""}
               onChange={(e) => onChange(f.key, e.target.value)}
-              className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+              className={`w-full appearance-none rounded-full border py-1.5 pl-3 pr-2 text-xs font-semibold outline-none transition focus:ring-2 focus:ring-emerald-100 lg:rounded-xl ${
+                filters[f.key]
+                  ? "border-emerald-500 bg-emerald-50 text-emerald-700"
+                  : "border-slate-200 bg-white text-slate-700"
+              }`}
             >
               <option value="">{f.label}</option>
               {f.options.map((opt) => (
                 <option key={opt} value={opt}>{opt}</option>
               ))}
             </select>
+            <span className={`pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-[9px] ${filters[f.key] ? "text-emerald-600" : "text-slate-400"}`}>
+              ▼
+            </span>
           </div>
         ))}
       </div>
