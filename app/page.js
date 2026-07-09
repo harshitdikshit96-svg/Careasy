@@ -2,6 +2,7 @@ import Categories from "@/components/home/Categories";
 import Hero from "@/components/home/Hero";
 import TrendingCars from "@/components/home/TrendingCars";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
+import StealDeals from "@/components/home/StealDeals";
 import CarCard from "@/components/listings/CarCard";
 import { prisma } from "@/lib/db";
 import { serializeCar } from "@/lib/carSerializer";
@@ -27,7 +28,7 @@ export default async function Home() {
     <>
       <Hero />
       <Categories />
-
+ <StealDeals />
       {/* Featured Cars */}
       <section className="mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-10 lg:px-8">
         <div className="mb-6 flex items-end justify-between">
@@ -53,6 +54,7 @@ export default async function Home() {
         </div>
       </section>
 
+     
       <TrendingCars cars={trendingCars} />
       <WhyChooseUs />
     </>
